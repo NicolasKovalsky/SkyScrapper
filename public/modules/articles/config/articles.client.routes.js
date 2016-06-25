@@ -1,14 +1,15 @@
 'use strict';
 
 // Setting up route
-angular.module('articles').config(['$stateProvider',
-	function($stateProvider) {
+angular.module('articles').config(['$stateProvider', 'RouteHelpersProvider',
+	function($stateProvider, helper) {
 		// Articles state routing
 		$stateProvider.
 		state('app.listArticles', {
 			url: '/articles',
-			title: 'List Articles',
-			templateUrl: 'modules/articles/views/list-articles.client.view.html'
+			title: 'Itinerarios',
+			templateUrl: 'modules/articles/views/list-articles.client.view.html',
+                resolve: helper.resolveFor('ui.grid')
 		}).
 		state('app.createArticle', {
 			url: '/articles/create',
@@ -16,7 +17,7 @@ angular.module('articles').config(['$stateProvider',
 			templateUrl: 'modules/articles/views/create-article.client.view.html'
 		}).
 		state('app.viewArticle', {
-			url: '/articles/:articleId',
+			url: '/itineraries/:articleId',
 			title: 'View Article',
 			templateUrl: 'modules/articles/views/view-article.client.view.html',
 			controller: 'ArticlesController'

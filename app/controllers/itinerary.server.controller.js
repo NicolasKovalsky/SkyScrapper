@@ -20,8 +20,8 @@ var mongoose = require('mongoose'),
 
 exports.process = function () {
 
-    var idaDesde = ['BUE'];
-    var idaHacia = ['MAD','AMS'];
+    var idaDesde = ['IGU','BUE'];
+    var idaHacia = ['MAD', 'BCN','AMS', 'PAR'];
     var vueltaDesde = ['MAD', 'BCN', 'FRA','VCE',  'AMS','PAR', 'MAD', 'BCN', 'ROM', 'VCE',];
     var vueltaHacia = ['BUE'];
     var dateIdaDesde = new Date(2016, 6, 17);
@@ -66,7 +66,7 @@ function cartesianProductOf() {
 
     
 
-    async.eachLimit(combinations, 5, function (combination, callback) {
+    async.eachLimit(combinations, 8, function (combination, callback) {
 
         var driver = new webdriver.Builder().forBrowser('chrome').build();
         driver.manage().deleteAllCookies();

@@ -1,25 +1,76 @@
 <h3>Articles
 	<ul class="breadcrumb">
-	  <li><a ui-sref="app.home">Home</a>
-	  </li>
-	  <li ng-repeat="state in $state.$current.path" ng-switch="$last" ng-if="!state.abstract" ng-class="{active: $last}"><a ng-switch-when="false" href="#{{state.url.format($stateParams)}}">{{state.title}}</a>
-	     <span ng-switch-when="true">{{state.title}}</span>
-	  </li>
+		<li><a ui-sref="app.home">Home</a>
+		</li>
+		<li ng-repeat="state in $state.$current.path" ng-switch="$last" ng-if="!state.abstract" ng-class="{active: $last}"><a ng-switch-when="false" href="#{{state.url.format($stateParams)}}">{{state.title}}</a>
+			<span ng-switch-when="true">{{state.title}}</span>
+		</li>
 	</ul>
 </h3>
 <section data-ng-controller="ArticlesController" data-ng-init="find()">
-	<div class="list-group">
-		<a data-ng-repeat="article in articles" data-ng-href="#!/articles/{{article._id}}" class="list-group-item">
+	<!--<div class="list-group">
+		<a data-ng-repeat="article in articles" data-ng-href="#!/itineraries/{{article._id}}" class="list-group-item">
+			
 			<small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="article.created | date:'mediumDate'"></span>
-				by
-				<span data-ng-bind="article.user.displayName"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="article.title"></h4>
+			<h4 class="list-group-item-heading" data-ng-bind="article.precioMasBajo | currency"></h4>
 			<p class="list-group-item-text" data-ng-bind="article.content"></p>
 		</a>
+	</div>-->
+	<div class="list-group">
+		<a data-ng-repeat="article in articles | orderBy: 'precioMasBajo'" data-ng-href="#!/itineraries/{{article._id}}" class="list-group-item">
+			<table class="wd-wide">
+				<tbody>
+					<tr>
+						<td class="wd-xs">
+							<div class="ph">
+								<h4 class="media-box-heading" data-ng-bind="article.precioMasBajo | currency">$1384</h4>
+								<!--<small class="text-muted">Vestibulum ante ipsum primis in faucibus orci</small>-->
+							</div>
+						</td>
+							<td class="wd-xs hidden-xs hidden-sm">
+							<div class="ph">
+								<p class="m0" data-ng-bind="article.idaFecha | date:'mediumDate'"></p>
+								<p class="m0" data-ng-bind="article.vueltaFecha | date:'mediumDate'"></p>
+								<!-- <p class="m0 text-muted">
+                        <em class="icon-doc mr fa-lg"></em>3500</p>-->
+							</div>
+						</td>
+						<td class="wd-xs hidden-xs hidden-sm">
+							<div class="ph">
+								<p class="m0" data-ng-bind="article.idaDesde">IGUAZU</p> 
+								<p class="m0" data-ng-bind="article.vueltaDesde">BARCELONA</p> 
+								<!--<small class="text-muted">4 weeks ago</small>-->
+							</div>
+						</td>
+						<td class="wd-xs hidden-xs hidden-sm">
+							<div class="ph">
+								<p class="m0" data-ng-bind="article.idaHacia">MADRID</p>
+								<p class="m0" data-ng-bind="article.vueltaHacia">BUENOS AIRES</p>
+								<!-- <p class="m0 text-muted">
+                        <em class="icon-user mr fa-lg"></em>26</p>-->
+							</div>
+						</td>
+					
+						<td class="wd-xs hidden-xs hidden-sm">
+							<div class="ph">
+								 <p class="m0 text-muted">
+                       				18 días en Europa</p>
+							</div>
+						</td>
+						<td class="wd-sm">
+							<div class="ph">
+								<a  data-ng-href="#!/itineraries/{{article._id}}" class="btn btn-default btn-lg">Ver vuelos</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</a>
 	</div>
+	
 	<h4 class="alert alert-purple text-center pv-lg" data-ng-if="articles.$resolved && !articles.length">
 		No articles yet, why don't you <a href="/#!/articles/create" class="text-yellow">create one</a>?
 	</h4>
